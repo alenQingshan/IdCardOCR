@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
             }
         });
 
-
-
         binding.button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -80,11 +78,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermission.Pe
             }
         });
 
-
         //扫描之前,提前申请权限..
         requestPermission();
-
-
 
         //注册扫描广播
         IntentFilter intentFilter = new IntentFilter();

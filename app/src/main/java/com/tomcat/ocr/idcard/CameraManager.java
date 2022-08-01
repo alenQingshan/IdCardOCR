@@ -232,6 +232,27 @@ public class CameraManager {
             camera.setParameters(parameters);
         }
     }
+    /**
+     * 闪光灯判断
+     */
+    public synchronized void lightSet() {
+        Log.e(TAG, "offLight");
+        if (camera != null) {
+            String flashMode = camera.getParameters().getFlashMode();
+            Log.i(TAG, "Flash mode: " + flashMode);
+            if (parameters.FLASH_MODE_OFF.equals(flashMode)) {
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                camera.setParameters(parameters);
+            }else{
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                camera.setParameters(parameters);
+            }
+
+
+        }
+    }
 
     /**
      * 拍照

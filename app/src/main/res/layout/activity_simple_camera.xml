@@ -28,8 +28,9 @@
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:background="@drawable/ic_ab_back_material_dark"
-        android:visibility="gone"/>
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_scan_select_image"/>
 
 
     <TextView
@@ -46,6 +47,4 @@
         android:id="@+id/camera_finderView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-
 </RelativeLayout>

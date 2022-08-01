@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.msd.ocr.idcard.LibraryInitOCR;
@@ -24,8 +26,10 @@ public class SimpleCameraActivity extends Activity {
     private ViewfinderView camera_finderView;
 
     private CameraManager cameraManager;
-    private Camera mCamera;
     private SurfaceView camera_sv;
+
+    private ImageButton bt_cancel;
+    private ImageButton bt_flash;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +40,22 @@ public class SimpleCameraActivity extends Activity {
         camera_sv = findViewById(R.id.camera_sv);
         camera_finderView = findViewById(R.id.camera_finderView);
         surfaceHolder = camera_sv.getHolder();
+        bt_cancel = findViewById(R.id.bt_cancel);
+        bt_flash = findViewById(R.id.bt_flash);
 
+        bt_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        bt_flash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cameraManager.lightSet();
+            }
+        });
 
         // 1. 初始化lib库(需要授权)
         LibraryInitOCR.initOCR(context);
@@ -45,19 +64,14 @@ public class SimpleCameraActivity extends Activity {
         // 2. 初始化解码器
         LibraryInitOCR.initDecode(context, handler, false);
 
-        //请求相机权限, 实际开中, 请先申请了权限再转跳到扫描界面.
+        //请求相机权限, 实际开发中, 请先申请了权限再转跳到扫描界面.
     }
-
-
-
-
 
     private boolean hasSurface;
     @Override
     protected void onResume() {
         super.onResume();
         cameraManager = new CameraManager();
-
 
         if (hasSurface) {
             // activity在paused时但不会stopped,因此surface仍旧存在；
@@ -85,7 +99,6 @@ public class SimpleCameraActivity extends Activity {
             cameraManager.startPreview(previewCallback);
 
 
-
             Camera camera = cameraManager.getCamera();
             Camera.Size size = camera.getParameters().getPreviewSize();
             camera_finderView.initFinder(size.width, size.height, handler);
@@ -108,14 +121,6 @@ public class SimpleCameraActivity extends Activity {
         }
     };
 
-
-
-
-
-
-
-
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -126,9 +131,6 @@ public class SimpleCameraActivity extends Activity {
         }
 
     }
-
-
-
 
     private Handler handler = new Handler(Looper.getMainLooper()){
         @Override
@@ -144,15 +146,12 @@ public class SimpleCameraActivity extends Activity {
                     Toast.makeText(context, "解析成功: " + ocrReulst, Toast.LENGTH_LONG).show();
                     break;
                 }
-
                 default:{
                     break;
                 }
             }
         }
     };
-
-
     
     private SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback() {
         @Override
@@ -173,5 +172,4 @@ public class SimpleCameraActivity extends Activity {
             hasSurface = false;
         }
     };
-
 }
