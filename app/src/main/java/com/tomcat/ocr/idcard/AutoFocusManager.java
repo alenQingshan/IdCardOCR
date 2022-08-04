@@ -39,8 +39,6 @@ public class AutoFocusManager implements Camera.AutoFocusCallback{
 //        if(success){
 //            camera.takePicture(null, null, myjpegCallback);
 //        }
-
-        ;
         focusing = false;
         autoFocusAgainLater();
     }

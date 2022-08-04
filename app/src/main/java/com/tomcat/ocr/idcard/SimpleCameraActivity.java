@@ -43,6 +43,7 @@ public class SimpleCameraActivity extends Activity {
         bt_cancel = findViewById(R.id.bt_cancel);
         bt_flash = findViewById(R.id.bt_flash);
 
+
         bt_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +116,7 @@ public class SimpleCameraActivity extends Activity {
             //Rect rect  =  new Rect(368, 144, 1549, 936);
 
             Rect rect  =  camera_finderView.getViewfinder(camera);
-
+            Log.d("zkw", rect.toString());
             //3. 传递相机数据,请求解码
             LibraryInitOCR.decode(rect, parameters.getPreviewSize().width, parameters.getPreviewSize().height, data);
         }

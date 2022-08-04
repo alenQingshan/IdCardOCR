@@ -194,9 +194,6 @@ public class ViewfinderView extends View {
 		canvas.drawLine(lineRight, lineBottom +  dLineWidth/2, lineRight, lineBottom - dLen, paint);
 
 		switch (lineModel) {
-			case 0:
-
-				break;
 			case 1://左边框线
 				canvas.drawLine(lineLeft, lineTop, lineLeft, lineBottom, paint);
 				break;

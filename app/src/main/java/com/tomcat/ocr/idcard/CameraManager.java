@@ -249,8 +249,6 @@ public class CameraManager {
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
                 camera.setParameters(parameters);
             }
-
-
         }
     }
 
